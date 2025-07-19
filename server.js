@@ -1,10 +1,13 @@
 require("dotenv").config() // This line is kept as per your original code, though .env files are not directly used in Next.js.
 const express = require("express")
+const cors = require("cors") // Import the cors package
 const app = express()
 const paymentRoutes = require("./routes/paymentRoutes")
 const { connectMainDB } = require("./config/db") // Import connectMainDB
 
+app.use(cors()) // Use cors middleware to enable CORS for all routes
 app.use(express.json())
+
 app.use("/api/payments", paymentRoutes)
 
 app.get("/", (req, res) => res.send("✅ YESP Payment Microservice Running"))
